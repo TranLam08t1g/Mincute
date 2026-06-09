@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
+import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib'
 import { useKidStore } from '../../store/kidStore'
 import { KID_PLANETS } from '../../data/planets-kids'
 import { getMoonsForPlanet } from '../../data/moons'
@@ -27,7 +28,7 @@ const ORBIT_COLORS: Record<string, number> = {
 export function SolarSystem() {
   const groupRef = useRef<THREE.Group>(null)
   const planetGroupRefs = useRef<Record<string, THREE.Group | null>>({})
-  const controlsRef = useRef<THREE.OrbitControls | null>(null)
+  const controlsRef = useRef<OrbitControlsImpl | null>(null)
   const step = useKidStore((s) => s.step)
   const focusPlanet = useKidStore((s) => s.focusPlanet)
   const camTarget = useRef(new THREE.Vector3(0, 0, 0))

@@ -2,10 +2,11 @@ import { useRef } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import * as THREE from 'three'
+import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib'
 import { useKidStore } from '../../store/kidStore'
 
 interface CameraControllerProps {
-  controlsRef: React.RefObject<THREE.OrbitControls | null>
+  controlsRef: React.RefObject<OrbitControlsImpl | null>
 }
 
 export function CameraController({ controlsRef }: CameraControllerProps) {

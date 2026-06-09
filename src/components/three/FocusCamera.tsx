@@ -2,11 +2,12 @@ import { useEffect, useRef } from 'react'
 import { useThree } from '@react-three/fiber'
 import gsap from 'gsap'
 import * as THREE from 'three'
+import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib'
 import { useKidStore } from '../../store/kidStore'
 import { KID_PLANETS } from '../../data/planets-kids'
 
 interface FocusCameraProps {
-  controlsRef: React.RefObject<THREE.OrbitControls | null>
+  controlsRef: React.RefObject<OrbitControlsImpl | null>
   planetGroupRefs: React.RefObject<Record<string, THREE.Group | null>>
 }
 
