@@ -4,47 +4,45 @@ import { KID_PLANETS } from '../../data/planets-kids'
 import { getPlanetIcon } from '../../data/planet-icons'
 
 export function ComparisonBar() {
-  const focusPlanet = useKidStore((s) => s.focusPlanet)
   const badges = useKidStore((s) => s.badges)
+
+  const doneCount = badges.length
 
   return (
     <div
-      className="fixed bottom-8 left-1/2 -translate-x-1/2 z-10 pointer-events-none
-                  max-sm:bottom-20 max-sm:scale-90"
+      className="fixed top-4 right-4 z-10 pointer-events-none"
       role="status"
-      aria-label="Tiến độ khám phá hành tinh"
+      aria-label={`Đã khám phá ${doneCount}/8 hành tinh`}
     >
       <div
-        className="bg-[rgba(15,18,40,0.85)] backdrop-blur-md rounded-full
-                    border border-[rgba(255,255,255,0.08)] px-5 py-2.5
-                    flex items-center gap-3 shadow-[0_4px_24px_rgba(0,0,0,0.2)]"
+        className="bg-[rgba(15,18,40,0.8)] backdrop-blur-md rounded-full
+                    border border-[rgba(255,255,255,0.06)] px-3 py-2
+                    flex items-center gap-2 shadow-[0_2px_12px_rgba(0,0,0,0.2)]"
       >
-        {KID_PLANETS.map((p) => {
-          const isFocused = focusPlanet === p.id
+        <span className="text-[10px] text-[#5a6a8a] font-semibold mr-1">
+          {doneCount}/8
+        </span>
+        {KID_PLANETS.slice(0, 8).map((p) => {
           const hasBadge = badges.includes(p.id)
           const PlanetIcon = getPlanetIcon(p.id)
 
           return (
             <motion.div
               key={p.id}
-              className="flex items-center"
-              initial={false}
               animate={{
-                scale: hasBadge ? 1.15 : isFocused ? 1.05 : 0.85,
-                opacity: hasBadge ? 1 : isFocused ? 0.7 : 0.3,
+                scale: hasBadge ? 1.1 : 0.75,
+                opacity: hasBadge ? 1 : 0.25,
                 filter: hasBadge
-                  ? 'drop-shadow(0 0 6px rgba(255,200,100,0.5))'
-                  : isFocused
-                    ? 'none'
-                    : 'grayscale(1)',
+                  ? 'drop-shadow(0 0 4px rgba(255,200,100,0.4))'
+                  : 'grayscale(1)',
               }}
-              transition={{ duration: 0.3, ease: 'easeOut' }}
+              transition={{ duration: 0.35, ease: 'easeOut' }}
               title={hasBadge ? `${p.name} - Đã khám phá` : p.name}
             >
               {PlanetIcon ? (
-                <PlanetIcon width={24} height={24} aria-hidden="true" />
+                <PlanetIcon width={18} height={18} aria-hidden="true" />
               ) : (
-                <span className="text-lg">{p.emoji}</span>
+                <span className="text-sm">{p.emoji}</span>
               )}
             </motion.div>
           )

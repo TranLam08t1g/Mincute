@@ -3,6 +3,7 @@ import { motion } from 'motion/react'
 import { useKidStore } from '../../store/kidStore'
 import { KID_PLANETS } from '../../data/planets-kids'
 import { getPlanetIcon } from '../../data/planet-icons'
+import { RobotGuideAvatar } from './RobotGuideAvatar'
 
 function useConfetti() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -81,7 +82,6 @@ export function AchievementBadge() {
 
   const planet = KID_PLANETS.find((p) => p.id === focusPlanet)
   const PlanetIcon = planet ? getPlanetIcon(planet.id) : null
-
   const canvasRef = useConfetti()
 
   if (!planet) return null
@@ -98,11 +98,7 @@ export function AchievementBadge() {
       role="dialog"
       aria-label={`Huy hiệu cho ${planet.name}`}
     >
-      <canvas
-        ref={canvasRef}
-        className="fixed inset-0 pointer-events-none z-0"
-        aria-hidden="true"
-      />
+      <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-0" aria-hidden="true" />
 
       <motion.div
         className="bg-[rgba(15,18,40,0.97)] backdrop-blur-xl
@@ -122,16 +118,20 @@ export function AchievementBadge() {
         />
 
         <motion.div
-          className="mb-4"
+          className="mb-4 flex items-center justify-center gap-4"
           initial={{ scale: 0, rotate: -30 }}
           animate={{ scale: 1, rotate: 0 }}
           transition={{ type: 'spring', stiffness: 250, damping: 12, delay: 0.2 }}
         >
           {PlanetIcon ? (
-            <PlanetIcon width={64} height={64} aria-hidden="true" style={{ margin: '0 auto' }} />
+            <PlanetIcon width={56} height={56} aria-hidden="true" />
           ) : (
-            <div className="text-6xl">{planet.emoji}</div>
+            <span className="text-5xl">{planet.emoji}</span>
           )}
+          <div className="flex flex-col items-center">
+            <RobotGuideAvatar mood="celebrate" width={40} height={40} />
+            <span className="text-[9px] text-[#7a8aaa] mt-1">Gia Khiêm</span>
+          </div>
         </motion.div>
 
         <motion.h2
@@ -161,7 +161,7 @@ export function AchievementBadge() {
           <p className="text-3xl mb-1">🏆</p>
           <p className="text-sm font-bold text-[#ffd84d]">HUY HIỆU ĐÃ NHẬN!</p>
           <p className="text-xs text-[#7a8aaa] mt-1">
-            Bạn đã khám phá thành công {planet.name}!
+            Gia Khiêm: "Min giỏi quá! Bạn đã khám phá thành công {planet.name}!"
           </p>
         </motion.div>
 
@@ -189,9 +189,7 @@ export function AchievementBadge() {
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2 }}
         >
-          <p className="text-xs text-[#5a6a8a] mb-2">
-            Đã khám phá: {badges.length} / 8 hành tinh
-          </p>
+          <p className="text-xs text-[#5a6a8a] mb-2">Đã khám phá: {badges.length} / 8 hành tinh</p>
           <div className="h-2 bg-[#1a2444] rounded-full overflow-hidden max-w-[200px] mx-auto">
             <motion.div
               className="h-full bg-gradient-to-r from-[#ffc864] to-[#ffd84d] rounded-full"

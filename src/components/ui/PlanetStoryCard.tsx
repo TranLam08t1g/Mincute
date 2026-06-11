@@ -17,14 +17,13 @@ export function PlanetStoryCard() {
 
   const PlanetIcon = getPlanetIcon(planet.id)
 
-  const tabs: { key: TabKey; label: string; emoji: string }[] = [
-    { key: 'about', label: 'Thông tin', emoji: '📖' },
-    { key: 'facts', label: 'Sự thật', emoji: '💡' },
-    { key: 'compare', label: 'So sánh', emoji: '📏' },
+  const tabs: { key: TabKey; label: string; icon: string }[] = [
+    { key: 'about', label: 'Thông tin', icon: '📖' },
+    { key: 'facts', label: 'Sự thật thú vị', icon: '💡' },
+    { key: 'compare', label: 'So sánh', icon: '📏' },
   ]
 
-  const badgeCls =
-    'bg-[rgba(255,255,255,0.04)] rounded-xl p-2.5 text-center border border-[rgba(255,255,255,0.05)]'
+  const badgeCls = 'bg-[rgba(255,255,255,0.04)] rounded-xl p-2.5 text-center border border-[rgba(255,255,255,0.05)]'
 
   const handleBackdrop = () => {
     setFocusPlanet(null)
@@ -34,12 +33,12 @@ export function PlanetStoryCard() {
   return (
     <motion.div
       className="fixed bottom-0 left-0 right-0 z-[100] pointer-events-auto"
-      onClick={(e) => { if (e.target === e.currentTarget) handleBackdrop() }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       role="dialog"
       aria-label={`Thông tin về ${planet.name}`}
+      onClick={(e) => { if (e.target === e.currentTarget) handleBackdrop() }}
     >
       <motion.div
         className="bg-[rgba(14,18,40,0.85)] backdrop-blur-xl
@@ -105,16 +104,25 @@ export function PlanetStoryCard() {
             <button
               key={t.key}
               onClick={() => setTab(t.key)}
-              className={`flex-1 cursor-pointer rounded-lg py-2 text-xs font-semibold
-                         transition-all duration-200 active:scale-[0.95] ${
-                           tab === t.key
-                             ? 'bg-[rgba(100,150,255,0.2)] text-[#aaccff]'
-                             : 'text-[#5a6a8a] hover:text-[#8a9ac0]'
-                         }`}
+              className="relative flex-1 cursor-pointer rounded-lg py-2 text-xs font-semibold
+                         transition-all duration-200 active:scale-[0.95]"
               aria-selected={tab === t.key}
               role="tab"
             >
-              {t.emoji} {t.label}
+              {tab === t.key && (
+                <motion.div
+                  className="absolute inset-0 rounded-lg bg-[rgba(100,150,255,0.2)]"
+                  layoutId="storyTab"
+                  transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                />
+              )}
+              <span
+                className={`relative ${
+                  tab === t.key ? 'text-[#aaccff]' : 'text-[#5a6a8a]'
+                }`}
+              >
+                {t.icon} {t.label}
+              </span>
             </button>
           ))}
         </div>
@@ -129,13 +137,13 @@ export function PlanetStoryCard() {
             <div className="bg-[rgba(255,255,255,0.03)] rounded-xl p-3 border border-[rgba(255,255,255,0.05)]">
               <p className="text-[10px] text-[#5a6a8a] uppercase mb-1">Loại</p>
               <p className="text-xs font-bold text-[#ffc864]">
-                {planet.type === 'rocky' ? 'Đá 🪨' : planet.type === 'gas' ? 'Khí 💨' : 'Băng ❄️'}
+                {planet.type === 'rocky' ? 'Hành tinh đá' : planet.type === 'gas' ? 'Hành tinh khí khổng lồ' : 'Hành tinh băng'}
               </p>
             </div>
             <div className="bg-[rgba(255,255,255,0.03)] rounded-xl p-3 border border-[rgba(255,255,255,0.05)]">
               <p className="text-[10px] text-[#5a6a8a] uppercase mb-1">Vành đai</p>
               <p className="text-xs font-bold text-[#ff9abc]">
-                {planet.hasRing ? 'Có 💫' : 'Không ✖️'}
+                {planet.hasRing ? 'Có vành đai' : 'Không có'}
               </p>
             </div>
           </motion.div>
@@ -154,7 +162,10 @@ export function PlanetStoryCard() {
                 className="flex items-start gap-3 px-4 py-3 bg-[rgba(255,200,100,0.04)]
                           rounded-2xl border border-[rgba(255,200,100,0.08)]"
               >
-                <span className="text-lg mt-0.5 flex-shrink-0">{i === 0 ? '🌟' : i === 1 ? '✨' : '💫'}</span>
+                <span className="inline-flex items-center justify-center w-6 h-6 rounded-full
+                               bg-[rgba(255,200,100,0.15)] text-[#ffc864] text-xs font-bold mt-0.5 flex-shrink-0">
+                  {i + 1}
+                </span>
                 <p className="text-sm text-[#e0d0ff] leading-relaxed">{fact}</p>
               </div>
             ))}
@@ -194,9 +205,9 @@ export function PlanetStoryCard() {
                        bg-gradient-to-r from-[#4d8fff] to-[#7c5cff]
                        text-white shadow-[0_0_20px_rgba(100,120,255,0.3)]
                        transition-all duration-200 hover:scale-105 active:scale-[0.96]"
-            aria-label="Bắt đầu làm câu đố"
+            aria-label="Bắt đầu làm câu đố về hành tinh này"
           >
-            Trả Lời Câu Đố 🎯
+            Làm Câu Đố 🎯
           </button>
         </div>
       </motion.div>

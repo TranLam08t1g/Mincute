@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { motion } from 'motion/react'
 import { useKidStore } from '../../store/kidStore'
 import { MinCuteAvatar } from '../ui/MinCuteAvatar'
+import { RobotGuideAvatar } from '../ui/RobotGuideAvatar'
 
 function FloatingEmoji({ emoji, x, y, delay, size }: { emoji: string; x: string; y: string; delay: number; size: string }) {
   return (
@@ -62,7 +63,7 @@ export function KidHero() {
 
       <div className="relative z-10">
         <motion.div
-          className="mb-6"
+          className="mb-6 relative"
           initial={{ scale: 0, rotate: -20 }}
           animate={{ scale: 1, rotate: 0 }}
           transition={{ type: 'spring', stiffness: 200, damping: 15, delay: 0.15 }}
@@ -120,6 +121,18 @@ export function KidHero() {
           từng hành tinh, giải câu đố vui và sưu tầm huy hiệu nào!
         </motion.p>
 
+        <motion.div
+          className="mb-8 flex items-center justify-center gap-2"
+          initial={{ opacity: 0, x: -40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.8, duration: 0.6, type: 'spring', stiffness: 150 }}
+        >
+          <RobotGuideAvatar mood="wave" width={40} height={40} />
+          <span className="text-sm text-[#7ed6ff] font-semibold bg-[rgba(126,214,255,0.08)] rounded-full px-4 py-1.5 border border-[rgba(126,214,255,0.15)]">
+            Gia Khiêm — Người bạn robot AI
+          </span>
+        </motion.div>
+
         <motion.button
           onClick={handleStart}
           className="cursor-pointer rounded-full px-14 py-5 text-xl font-bold
@@ -130,7 +143,7 @@ export function KidHero() {
                      active:scale-95"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.85, duration: 0.5, type: 'spring', stiffness: 200 }}
+          transition={{ delay: 0.9, duration: 0.5, type: 'spring', stiffness: 200 }}
           whileHover={{ scale: 1.08 }}
           whileTap={{ scale: 0.95 }}
           aria-label="Bắt đầu hành trình khám phá vũ trụ"

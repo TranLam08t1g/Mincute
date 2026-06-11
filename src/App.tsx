@@ -2,12 +2,11 @@ import { AnimatePresence } from 'motion/react'
 import { useKidStore } from './store/kidStore'
 import { KidHero } from './components/sections/KidHero'
 import { SceneSetup } from './components/three/SceneSetup'
-import { GuideCharacter } from './components/ui/GuideCharacter'
+import { FloatingRobot } from './components/ui/FloatingRobot'
 import { PlanetStoryCard } from './components/ui/PlanetStoryCard'
 import { QuizPanel } from './components/ui/QuizPanel'
 import { AchievementBadge } from './components/ui/AchievementBadge'
 import { ComparisonBar } from './components/ui/ComparisonBar'
-import { TouchHint } from './components/ui/TouchHint'
 import { WebGLErrorBoundary } from './components/WebGLErrorBoundary'
 
 export function App() {
@@ -20,26 +19,16 @@ export function App() {
         <SceneSetup />
       </WebGLErrorBoundary>
 
+      <FloatingRobot />
+
       <AnimatePresence mode="wait">
-        {step === 'hero' && (
-          <KidHero key="hero" />
-        )}
+        {step === 'hero' && <KidHero key="hero" />}
       </AnimatePresence>
 
-      {(step === 'explore' || step === 'quiz') && <GuideCharacter />}
-
-      {step === 'explore' && !focusPlanet && <TouchHint />}
-
       <AnimatePresence>
-        {step === 'story' && focusPlanet && (
-          <PlanetStoryCard key="story" />
-        )}
-        {step === 'quiz' && focusPlanet && (
-          <QuizPanel key="quiz" />
-        )}
-        {step === 'badge' && focusPlanet && (
-          <AchievementBadge key="badge" />
-        )}
+        {step === 'story' && focusPlanet && <PlanetStoryCard key="story" />}
+        {step === 'quiz' && focusPlanet && <QuizPanel key="quiz" />}
+        {step === 'badge' && focusPlanet && <AchievementBadge key="badge" />}
       </AnimatePresence>
 
       {step !== 'hero' && <ComparisonBar />}
