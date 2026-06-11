@@ -1,73 +1,45 @@
-# React + TypeScript + Vite
+# Khám Phá Vũ Trụ - Nhà Thám Hiểm Nhí
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Ứng dụng giáo dục tương tác dành cho thiếu nhi Việt Nam, giúp khám phá hệ Mặt Trời qua đồ họa 3D, câu đố vui và sưu tầm huy hiệu.
 
-Currently, two official plugins are available:
+## Tính năng
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Hệ Mặt Trời 3D** - Tám hành tinh với quỹ đạo, vệ tinh, texture thực tế, shader custom
+- **Tương tác trực quan** - Nhấp vào hành tinh để xem thông tin, xoay camera 3D
+- **Câu đố vui** - 33+ câu hỏi trắc nghiệm giúp bé học hỏi khi chơi
+- **Sưu tầm huy hiệu** - Mỗi hành tinh khám phá xong sẽ được huy hiệu riêng
+- **Nhân vật Min Cute** - Hướng dẫn viên phi hành gia dễ thương đồng hành cùng bé
+- **Hiệu ứng đẹp mắt** - Confetti, glow, animation mượt mà
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| Thư viện | Mục đích |
+|---|---|
+| React 19 + TypeScript 6 | UI framework |
+| Vite 8 | Build tool |
+| Three.js + React Three Fiber | Đồ họa 3D |
+| GSAP + Motion | Animation |
+| TailwindCSS v4 | Styling |
+| Zustand | State management |
 
-## Expanding the ESLint configuration
+## Cài đặt & Chạy
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+```bash
+# Cài đặt dependencies
+npm install
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+# Chạy dev server
+npm run dev
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+# Build production
+npm run build
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Preview production build
+npm run preview
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Deploy
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Web được tự động deploy lên GitHub Pages khi push lên branch `main`.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+👉 **[Khám phá vũ trụ ngay](https://tranlam08t1g.github.io/Mincute)**

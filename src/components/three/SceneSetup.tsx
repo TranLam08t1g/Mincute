@@ -11,6 +11,7 @@ export function SceneSetup() {
       camera={{ position: [0, 8, 22], fov: 45, near: 0.1, far: 1000 }}
       gl={{ antialias: true, toneMapping: 3, toneMappingExposure: 1.1 }}
       style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 1 }}
+      dpr={[1, Math.min(2, window.devicePixelRatio)]}
       onPointerMissed={() => {
         if (useKidStore.getState().step === 'hero') return
         setFocusPlanet(null)
